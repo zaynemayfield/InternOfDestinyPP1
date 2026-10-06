@@ -60,9 +60,11 @@ namespace InternOfDestiny
         private void displayWorkoutResults()
         { 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("========================================");
             Console.WriteLine("WORKOUT COMPLETE");
             Console.WriteLine("========================================\n");
+            Console.ResetColor();
 
             Console.WriteLine($"Precision: {precisionScore}");
             Console.WriteLine($"Button Rush: {buttonRushScore}");
@@ -80,6 +82,11 @@ namespace InternOfDestiny
         {
             // Run a mini game where the user has to press a specific key when prompted 5 different times there should be no delay between presses, So once the correct or incorrect key has been pressed the next one is given. if they press the wrong key, then they get no point is given for that 1, once all five have been attempted then it will calculate the total and the workout ends.
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("========================================");
+            Console.WriteLine("MEGA CORP Reflex Training");
+            Console.WriteLine("========================================\n");
+            Console.ResetColor();
             // Display the button rush mini-game instructions
             Console.WriteLine("Reflex Training Mini-Game: Press the correct Key when prompted,\nyou get 5 chances, type as quickly as you can!\nPress enter to start.");
             ConsoleKeyInfo startKey = Console.ReadKey(true);
@@ -169,6 +176,11 @@ namespace InternOfDestiny
         {
             // Run a mini game where the user has to press space bar a specific amount of times within a time limit, if they press it too many or too few times, then they get no points and runReflex() is called next.
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("========================================");
+            Console.WriteLine("MEGA CORP Calisthenics Training");
+            Console.WriteLine("========================================\n");
+            Console.ResetColor();
             // Display the button rush mini-game instructions
             Console.WriteLine("Button Rush Mini-Game: Press Spacebar a specific amount of times within the time limit! Press space to start.");
             ConsoleKeyInfo startKey = Console.ReadKey(true);
@@ -225,6 +237,11 @@ namespace InternOfDestiny
         {
             // Implement the precision mini-game logic here. Introduce the user to the game, set up the timing, and handle user input. If the user presses the wrong key, they get no points and the workout ends.
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("========================================");
+            Console.WriteLine("MEGA CORP Accuracy Training");
+            Console.WriteLine("========================================\n");
+            Console.ResetColor();
             // Display the precision mini-game instructions
             Console.WriteLine("Precision Mini-Game: Type the word exactly! No Mistakes! Press space to start.");
             ConsoleKeyInfo startKey = Console.ReadKey(true);

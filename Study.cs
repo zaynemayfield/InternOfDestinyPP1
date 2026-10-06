@@ -47,9 +47,11 @@ namespace InternOfDestiny
         private void displayStudyResults()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("========================================");
             Console.WriteLine("STUDY COMPLETE");
             Console.WriteLine("========================================\n");
+            Console.ResetColor();
             if (score == 10)
             {
                 Console.WriteLine("PERFECT SCORE!\n");
@@ -83,6 +85,11 @@ namespace InternOfDestiny
                 currentQuestion.ShuffleOptions(rng); // Shuffle the options for each question
 
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("===========================================================================");
+                Console.WriteLine($"MEGA CORP Study Session");
+                Console.WriteLine("===========================================================================\n");
+                Console.ResetColor();
                 Console.WriteLine($"\nQuestion {i + 1} of {totalQuestionsToAsk}");
                 Console.WriteLine(currentQuestion.Text);
                 Console.WriteLine();

@@ -41,6 +41,11 @@
             return timeLimitMS;
         }
 
+        internal object getTitle()
+        {
+            return title;
+        }
+
         internal void takeDamage(int totalDamage)
         {
             currentHealth -= totalDamage;

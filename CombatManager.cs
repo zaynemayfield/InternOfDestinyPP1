@@ -18,11 +18,22 @@ namespace InternOfDestiny
         internal void startFight()
         {
             stopwatch.Start();
-            while(player.getLives() > 0 && boss.getCurrentHealth() > 0 && stopwatch.ElapsedMilliseconds < boss.getTimeLimitMS())
+            
+            while (player.getLives() > 0 && boss.getCurrentHealth() > 0 && stopwatch.ElapsedMilliseconds < boss.getTimeLimitMS())
             {
-                Console.WriteLine($"\n{boss.getName()} has {boss.getCurrentHealth()} health remaining.");
-                Console.WriteLine($"You have {player.getLives()} lives remaining.\n");
-                Console.WriteLine("\nPress any key to continue...");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("===========================================================================");
+                Console.WriteLine($"You face {boss.getName()} {boss.getTitle()}.");
+                Console.WriteLine("===========================================================================\n");
+                Console.ResetColor();
+                Console.Write($"\n{boss.getName()} {boss.getTitle()} has ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write($"{boss.getCurrentHealth()} health");
+                Console.ResetColor();
+                Console.WriteLine(" remaining.");
+                Console.WriteLine($"You have {player.getLives()} lives remaining. Continue...");
+                //Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 if (chooseBossAttack())
                 {
@@ -33,10 +44,10 @@ namespace InternOfDestiny
             if (player.getLives() <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\nYou have been defeated by the boss!");
+                Console.WriteLine("\nYou have been defeated by the boss! Continue...");
                 Console.ResetColor();
                 // Handle player defeat by resetting player stats to begging of level stats.
-                Console.WriteLine("\nPress any key to continue...");
+                //Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 player.playerDefeated();
                 
@@ -44,10 +55,10 @@ namespace InternOfDestiny
             else if (boss.getCurrentHealth() <= 0)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nYou have defeated {boss.getName()}!");
+                Console.WriteLine($"\nYou have defeated {boss.getName()}! Continue...");
                 Console.ResetColor();
                 // Handle boss defeat (e.g., rewards, next level, etc.)
-                Console.WriteLine("\nPress any key to continue...");
+                //Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 player.levelUp();
                 
@@ -55,10 +66,10 @@ namespace InternOfDestiny
             else if (stopwatch.ElapsedMilliseconds >= boss.getTimeLimitMS())
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nTime's up! {boss.getName()} has won the battle!");
+                Console.WriteLine($"\nTime's up! {boss.getName()} has won the battle! Continue...");
                 Console.ResetColor();
                 // Handle time limit exceeded (e.g., boss wins, player loses, etc.)
-                Console.WriteLine("\nPress any key to continue...");
+                //Console.WriteLine("\nPress any key to continue...");
                 Console.ReadKey(true);
                 player.playerDefeated();
                 
@@ -83,8 +94,25 @@ namespace InternOfDestiny
         {
             // Randomly choose a direction for the boss attack then player must respond with "D" if boss attacks from the left, "A" if boss attacks from the right and "S" when he pokes your eyes.
             Console.Clear();
-            Console.WriteLine("Dodge left with a and right with d and duck with s\nAre you ready?");
-            Console.WriteLine("\nPress any key to start...");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("===========================================================================");
+            Console.WriteLine($"MEGA CORP Boss Battle");
+            Console.WriteLine("===========================================================================\n");
+            Console.ResetColor();
+            Console.Write("Dodge left with ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("a");
+            Console.ResetColor();
+            Console.Write(" and right with ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("d");
+            Console.ResetColor();
+            Console.Write(" and duck with ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("s");
+            Console.ResetColor();
+            Console.WriteLine("\nAre you ready? Continue...");
+            //Console.WriteLine("\nPress any key to start...");
             Console.ReadKey(true);
             int direction = random.Next(1, 3); // Randomly choose a direction (1-3)
             Stopwatch stopwatch = new Stopwatch();
@@ -99,20 +127,22 @@ namespace InternOfDestiny
                 stopwatch.Stop();
                 char input = char.ToUpper(keyInfo.KeyChar);
 
-                if (input == 'D' && calculateTime(stopwatch.ElapsedMilliseconds, 3000) > 0)
+                if (input == 'D' && calculateTime(stopwatch.ElapsedMilliseconds, 1500) > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You successfully dodged the attack!");
+                    Console.WriteLine($"You successfully dodged the attack in {calculateTime(stopwatch.ElapsedMilliseconds, 1500)}ms! Continue...");
                     Console.ResetColor();
+                    Console.ReadKey(true);
                     return true; // Return 1 for successful dodge
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You failed to dodge the attack!");
+                    Console.WriteLine("You failed to dodge the attack! You lost a life. Continue...");
                     Console.ResetColor();
                     // Calculate damage to player
                     player.loseLife();
+                    Console.ReadKey(true);
                     return false; // Return 0 for failed dodge
                 }
             }
@@ -123,20 +153,22 @@ namespace InternOfDestiny
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 stopwatch.Stop();
                 char input = char.ToUpper(keyInfo.KeyChar);
-                if (input == 'A' && calculateTime(stopwatch.ElapsedMilliseconds, 3000) > 0)
+                if (input == 'A' && calculateTime(stopwatch.ElapsedMilliseconds, 1500) > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You successfully dodged the attack!");
+                    Console.WriteLine($"You successfully dodged the attack in {calculateTime(stopwatch.ElapsedMilliseconds, 1500)}ms! Continue...");
                     Console.ResetColor();
+                    Console.ReadKey(true);
                     return true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You failed to dodge the attack!");
+                    Console.WriteLine("You failed to dodge the attack! You lost a life. Continue...");
                     Console.ResetColor();
                     // Calculate damage to player
                     player.loseLife();
+                    Console.ReadKey(true);
                     return false;
                 }
             }
@@ -147,20 +179,22 @@ namespace InternOfDestiny
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 stopwatch.Stop();
                 char input = char.ToUpper(keyInfo.KeyChar);
-                if (input == 'S' && calculateTime(stopwatch.ElapsedMilliseconds, 3000) > 0)
+                if (input == 'S' && calculateTime(stopwatch.ElapsedMilliseconds, 1500) > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You successfully dodged the attack!");
+                    Console.WriteLine($"You successfully dodged the attack in {calculateTime(stopwatch.ElapsedMilliseconds, 1500)}ms! Continue...");
                     Console.ResetColor();
+                    Console.ReadKey(true);
                     return true;
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You failed to dodge the attack!");
+                    Console.WriteLine("You failed to dodge the attack! You lost a life. Continue...");
                     Console.ResetColor();
                     // Calculate damage to player
                     player.loseLife();
+                    Console.ReadKey(true);
                     return false;
                 }
             }
@@ -177,12 +211,18 @@ namespace InternOfDestiny
         internal bool runTypeAttack()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("===========================================================================");
+            Console.WriteLine($"MEGA CORP Boss Battle");
+            Console.WriteLine("===========================================================================\n");
+            Console.ResetColor();
             Stopwatch stopwatch = new Stopwatch();
-            Console.WriteLine("Get ready to type the word, the faster the more damage!");
-            Console.WriteLine("\nPress any key to start...");
+            
+            Console.WriteLine("Get ready to type the word, the faster the more damage! Continue...");
+            //Console.WriteLine("\nPress any key to start...");
             Console.ReadKey(true);
 
-            Console.Write($"COUNTER ATTACK! Time: {calculateTime(0, 4000)}ms\n\n TYPE: ");
+            Console.Write($"COUNTER ATTACK! Time: {calculateTime(0, 2000)}ms\n\n TYPE: ");
             Console.ForegroundColor = ConsoleColor.Green;
             string phrase = getRandomPhrase();
             Console.WriteLine($"{phrase}");
@@ -201,17 +241,19 @@ namespace InternOfDestiny
 
                 // Calculate damage to boss
                 int baseDamage = random.Next(3, 9) + (int)(player.getStrength()*0.25) + player.getLuck();
-                int bonusDamage = (int)(calculateTime(stopwatch.ElapsedMilliseconds, 4000) / 100); // Bonus damage based on time left
+                int bonusDamage = (int)(calculateTime(stopwatch.ElapsedMilliseconds, 2000) / 100); // Bonus damage based on time left
                 int totalDamage = baseDamage + bonusDamage;
                 boss.takeDamage(totalDamage);
-                Console.WriteLine($"You dealt {totalDamage} damage to {boss.getName()}!");
+                Console.WriteLine($"You dealt {totalDamage} damage to {boss.getName()}! Continue...");
+                Console.ReadKey(true);
                 return true;
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("You failed to type the phrase correctly!");
+                Console.WriteLine("You failed to type the phrase correctly! Continue...");
                 Console.ResetColor();
+                Console.ReadKey(true);
                 // No damage to boss
                 return false;
             }

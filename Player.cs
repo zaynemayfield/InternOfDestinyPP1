@@ -41,11 +41,26 @@ namespace InternOfDestiny
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine($"\n========================================\n{name} - {title}\n========================================");
             Console.WriteLine($"{"Level:",-15} {level}");
-            Console.WriteLine($"{"Lives:",-15} {getHearts()}");
+            // Red Lives
+            Console.Write($"{"Lives:",-15} ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(getHearts());
+            Console.ResetColor();
+            Console.WriteLine();
             Console.WriteLine($"{"Strength:",-15} {strength}");
             Console.WriteLine($"{"Intellect:",-15} {intellect}");
-            Console.WriteLine($"{"Luck:",-15} {luck}");
-            Console.WriteLine($"{"Money:",-15} ${money}\n");
+            // Green Luck
+            Console.Write($"{"Luck:",-15} ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(luck);
+            Console.ResetColor();
+            Console.WriteLine();
+            // Yellow Money
+            Console.Write($"{"Money:",-15} ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"${money}");
+            Console.ResetColor();
+            Console.WriteLine("\n");
             Console.WriteLine($"{"Bosses Defeated:", -15} {bossesDefeated}\n");
             Console.WriteLine($"{"Training Sessions Remaining:",-30} {trainingSessionsRemaining}\n\n");
             Console.WriteLine("\nPress any key to continue...");

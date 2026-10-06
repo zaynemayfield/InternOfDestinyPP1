@@ -43,6 +43,11 @@ namespace InternOfDestiny
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("===========================================================================");
+                Console.WriteLine($"MEGA CORP Menu");
+                Console.WriteLine("===========================================================================\n");
+                Console.ResetColor();
                 if (!player.hasTrainingSessionsRemaining())
                 {
                     Console.WriteLine($"TRAINING COMPLETE {player.getName().ToUpper()}");
